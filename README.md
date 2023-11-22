@@ -3,7 +3,6 @@
 ### Database Design
 
 - [ ] Structure
-- [ ] Define Relationships
 - [ ] Seeders
 - [ ] Factories
 - [ ] Enums
