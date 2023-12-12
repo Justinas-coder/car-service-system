@@ -21,7 +21,7 @@ return new class extends Migration
             $table->year('year');
             $table->foreignId('service_id');
             $table->decimal('total_cost', 10, 2);
-            $table->boolean('completed')->default(false);
+            $table->text('status');
             $table->timestamps();
         });
     }
