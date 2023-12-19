@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'vehicle_model_id' => VehicleModel::inRandomOrder()->value('id'),
             'year' => fake()->year,
             'service_id' => Service::factory(),
-            'total_cost' => fake()->randomFloat(2, 20, 200),
+            'total_price' => fake()->randomFloat(2, 20, 200),
             'status' => OrderStatus::randomEnum()
         ];
     }

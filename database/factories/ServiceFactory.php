@@ -21,7 +21,7 @@ class ServiceFactory extends Factory
         return [
             'name' => fake()->word,
             'description' => fake()->sentence,
-            'cost' => fake()->randomFloat(2, 20, 200),
+            'price' => fake()->randomFloat(2, 20, 200),
         ];
     }
 }

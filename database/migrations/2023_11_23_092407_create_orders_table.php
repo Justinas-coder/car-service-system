@@ -14,14 +14,28 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')
+                ->nullable()
                 ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('vehicle_make_id');
-            $table->foreignId('vehicle_model_id');
+                ->nullOnDelete();
+
+            $table->foreignId('vehicle_make_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+
+            $table->foreignId('vehicle_model_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+
             $table->year('year');
-            $table->foreignId('service_id');
-            $table->decimal('total_cost', 10, 2);
-            $table->text('status');
+            $table->foreignId('service_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+
+            $table->integer('total_price');
+            $table->string('status');
             $table->timestamps();
         });
     }
