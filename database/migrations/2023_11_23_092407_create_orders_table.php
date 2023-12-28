@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('user_id')
+            $table->foreignId('client_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
@@ -29,11 +28,14 @@ return new class extends Migration
                 ->constrained()
                 ->nullOnDelete();
 
+            $table->year('year');
             $table->foreignId('service_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
 
+            $table->integer('total_price');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -43,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('orders');
     }
 };
