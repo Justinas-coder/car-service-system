@@ -2,16 +2,16 @@
 
 ### Database Design
 
-- [ ] Structure
-- [ ] Seeders
-- [ ] Factories
-- [ ] Enums
+- [x] Structure
+- [x] Seeders
+- [x] Factories
+- [x] Enums
 
 
 ### Models
 
-- [ ] Models
-- [ ] Define Relationships
+- [x] Models
+- [x] Define Relationships
 
 
 ### Views
