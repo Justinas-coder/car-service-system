@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([CarSeeder::class]);
 
+        User::factory()->admin()->create();
         User::factory(10)->create();
         Service::factory(10)->create();
         Invoice::factory(10)->create();
-        Client::factory(20)->create();
         Order::factory(25)->create();
     }
 }
