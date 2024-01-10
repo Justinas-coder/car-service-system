@@ -2,21 +2,31 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
-
+            <div class="flex justify-between">
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')">
+                    <x-nav-link :href="route('orders.create')" :active="request()->routeIs('order.create')">
                         {{ __('New Order') }}
                     </x-nav-link>
-{{--                    <x-nav-link :href="route('order.history')" :active="request()->routeIs('order.history')">--}}
-{{--                        {{ __('Order History') }}--}}
-{{--                    </x-nav-link>--}}
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('order.index')">
+                        {{ __('Orders History') }}
+                    </x-nav-link >
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <div class="hidden  sm:ms-10 sm:flex object-right">
+                    @auth()
+                        @if(auth()->user()->isRole('admin'))
+
+                            <x-nav-link  :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                                {{ __('Admin') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
+                </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

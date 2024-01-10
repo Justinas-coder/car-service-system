@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\VehicleMake;
-use App\Models\VehicleModel;
 use Illuminate\Http\Request;
 
 
 class OrderController extends Controller
 {
-    public function index()
+    public function create()
     {
         return view('orders.create', [
             'vehicleMakes' => VehicleMake::all(),
@@ -19,8 +18,8 @@ class OrderController extends Controller
         ]);
     }
 
-    public function show(Request $request)
+    public function store(Request $request)
     {
-        dd($request->all());
+        dd($request->all()); //TODO still in progress
     }
 }

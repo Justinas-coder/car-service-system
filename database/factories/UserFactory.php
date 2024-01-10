@@ -22,7 +22,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'status' => 'user',
+            'role' => 'user',
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
@@ -35,7 +35,7 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'name' => 'Justinas',
-                'status' => 'admin',
+                'role' => 'admin',
                 'email' => 'admin@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('admin'),

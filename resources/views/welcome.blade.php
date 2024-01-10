@@ -20,7 +20,7 @@
     @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
             @auth
-                <a href="{{ url('/order') }}"
+                <a href="{{ url('/orders/create') }}"
                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
             @else
                 <a href="{{ route('login') }}"
@@ -68,7 +68,7 @@
                     </dl>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
                         @auth()
-                            <a href="{{ url('/order') }}"
+                            <a href="{{ url('/orders/create') }}"
                                class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Order Now!
                             </a>

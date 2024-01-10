@@ -17,7 +17,7 @@ class Order extends Model
         'status',
         'total_price'
     ];
-    public function client(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
