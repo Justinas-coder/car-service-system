@@ -45,7 +45,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function isRole($role)
+    public function isRole(string $role): bool
     {
         return $this->role === $role;
     }

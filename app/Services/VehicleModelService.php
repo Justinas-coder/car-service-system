@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use App\Models\VehicleModel;
+use Illuminate\Database\Eloquent\Collection;
 
 class VehicleModelService
 {
-    public function getByMake($makeId)
+    public function getByMake(int $makeId): Collection
     {
-        return VehicleModel::where('vehicle_make_id', $makeId)->get();
+        return VehicleModel::query()->where('vehicle_make_id', $makeId)->get();
     }
 }

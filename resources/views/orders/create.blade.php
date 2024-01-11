@@ -20,7 +20,7 @@
             @csrf
             <div class="flex-1">
                 <label for="make_id" class="block mb-2 text-sm font-medium">Makes</label>
-                <select id="make_id" name="make_id" x-model="make" x-on:change="onMakeChange"
+                <select id="make_id" name="make_id" x-model="vehicleMake" x-on:change="onMakeChange"
                         class="inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                     <option>Choose vehicle make</option>
                     @foreach($vehicleMakes as $make)
