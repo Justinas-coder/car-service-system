@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\VehicleMake;

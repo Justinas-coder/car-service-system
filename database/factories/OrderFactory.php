@@ -21,7 +21,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'client_id' => Client::factory(),
+            'user_id' => User::factory(),
             'vehicle_make_id' => VehicleMake::inRandomOrder()->value('id'),
             'vehicle_model_id' => VehicleModel::inRandomOrder()->value('id'),
             'year' => fake()->year,
