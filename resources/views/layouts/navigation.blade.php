@@ -19,7 +19,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <div class="hidden  sm:ms-10 sm:flex object-right">
                     @auth()
-                        @if(auth()->user()->isRole('admin'))
+                        @if(Gate::allows('isAdmin'))
 
                             <x-nav-link  :href="route('admin.index')" :active="request()->routeIs('admin.index')">
                                 {{ __('Admin') }}
