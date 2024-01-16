@@ -10,8 +10,8 @@
         <form action="{{ route('admin.vehicle-make.store') }}" method="POST">
             @csrf
 
-                <x-form.input name="title" required />
-                <x-form.button>Create</x-form.button>
+            <x-form.input name="title" required/>
+            <x-form.button>Create</x-form.button>
         </form>
 
     </div>

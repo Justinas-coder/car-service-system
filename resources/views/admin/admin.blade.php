@@ -14,7 +14,7 @@
                 <nav class="flex justify-center space-x-20 " aria-label="Tabs">
                     <x-admin-nav-link :href="route('admin.vehicle-make.index')"
                                       :active="request()->routeIs('admin.vehicle-make.index')">
-                        {{ __('Vehicle Makes and models') }}
+                        {{ __('Vehicle makes and models') }}
                     </x-admin-nav-link>
                     <x-admin-nav-link :href="route('admin.service.index')"
                                       :active="request()->routeIs('admin.service.index')">

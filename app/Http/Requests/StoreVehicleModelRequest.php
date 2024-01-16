@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
-class StoreVehicleMakeRequest extends FormRequest
+class StoreVehicleModelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class StoreVehicleMakeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:vehicle_makes,title|string|max:255'
+            'title' => 'required|unique:vehicle_models,title|string|max:255'
         ];
     }
 }
