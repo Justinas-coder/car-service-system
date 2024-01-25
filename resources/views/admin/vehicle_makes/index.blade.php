@@ -11,7 +11,7 @@
         {{-- Actions buttons       --}}
         <div class="mb-5 flex justify-end items-center gap-3">
             <a class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-               href="{{ route('admin.vehicle-make.create') }}">
+               href="{{ route('admin.vehicle-makes.create') }}">
                 Add Vehicle Make
             </a>
         </div>
@@ -26,16 +26,16 @@
             </thead>
             <tbody class="bg-white">
             @foreach($vehicleMakes as $make)
-                <tr class="even:bg-gray-50 cursor-pointer" onclick="window.location='{{ route('admin.vehicle-make.models.index', $make->id) }}'">
+                <tr class="even:bg-gray-50 cursor-pointer" onclick="window.location='{{ route('admin.vehicle-makes.models.index', $make->id) }}'">
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                         {{ $make->title }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $make->created_at }}</td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                        <a href="{{ route('admin.vehicle-make.edit', $make->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <a href="{{ route('admin.vehicle-makes.edit', $make->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                     </td>
                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                        <form action="{{ route('admin.vehicle-make.destroy', $make->id) }}" method="POST">
+                        <form action="{{ route('admin.vehicle-makes.destroy', $make->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
 

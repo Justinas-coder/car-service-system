@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceRequest;
-use App\Http\Requests\StoreVehicleMakeRequest;
 use App\Models\Service;
-use App\Models\VehicleMake;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -24,15 +21,13 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request)
     {
-        $service = new Service([
+        Service::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
         ]);
 
-        $service->save();
-
-        return redirect()->route('admin.service.index')->with('success', 'Service added successfully!');
+        return redirect()->route('admin.services.index')->with('success', 'Service added successfully!');
     }
 
     public function edit(Service $service)
@@ -42,7 +37,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function update(Service $service,StoreServiceRequest $request)
+    public function update(Service $service, StoreServiceRequest $request)
     {
         $service->update([
             'name' => $request->name,
@@ -51,7 +46,7 @@ class ServiceController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.service.index')
+            ->route('admin.services.index')
             ->with('success', "Service  {$service->name} updated successfully!");
     }
 
@@ -60,7 +55,7 @@ class ServiceController extends Controller
         $service->delete();
 
         return redirect()
-            ->route('admin.service.index')
+            ->route('admin.services.index')
             ->with('success', "Service  {$service->name} deleted successfully!");
     }
 }

@@ -11,16 +11,23 @@ class VehicleModelController extends Controller
 {
     public function index(VehicleMake $vehicleMake)
     {
-        return view('admin.vehicle_models.index',[
+        return view('admin.vehicle_models.index', [
             'make' => $vehicleMake,
-            'vehicle_models' => $vehicleMake->models()->get(),
+            'vehicle_models' => $vehicleMake->models()->get()->all(),
         ]);
     }
 
     public function create(VehicleMake $vehicleMake)
     {
-        return view('admin.vehicle_models.create',[
+        return view('admin.vehicle_models.create', [
             'make' => $vehicleMake
+        ]);
+    }
+
+    public function edit(VehicleModel $model)
+    {
+        return view('admin.vehicle_models.edit', [
+            'model' => $model
         ]);
     }
 
@@ -30,6 +37,19 @@ class VehicleModelController extends Controller
             'title' => $request->title,
         ]);
 
-        return redirect()->route('admin.vehicle-make.models.index', $vehicleMake)->with('success', 'Vehicle model added successfully!');
+        return redirect()->route('admin.vehicle-makes.models.index', $vehicleMake)->with('success', 'Vehicle model added successfully!');
     }
+
+    public function update(VehicleModel $model, StoreVehicleModelRequest $request)
+    {
+        $model->update([
+            'title' => $request->title,
+        ]);
+
+//        $vehicleMake = $model->make()->id;
+
+        return redirect()->route('admin.vehicle-makes.models.index', $vehicleMake)
+            ->with('success', 'Vehicle model updated successfully!');    }
+
+
 }

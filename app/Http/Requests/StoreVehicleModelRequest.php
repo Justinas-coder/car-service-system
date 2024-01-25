@@ -23,7 +23,7 @@ class StoreVehicleModelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:vehicle_models,title|string|max:255'
+            'title' => ['required', 'unique:vehicle_models,title', 'string', 'max:255']
         ];
     }
 }

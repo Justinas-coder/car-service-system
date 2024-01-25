@@ -10,7 +10,7 @@ class VehicleMakeController extends Controller
 {
     public function index()
     {
-        return view('admin.vehicle_makes.index',[
+        return view('admin.vehicle_makes.index', [
             'vehicleMakes' => VehicleMake::all(),
         ]);
     }
@@ -22,13 +22,11 @@ class VehicleMakeController extends Controller
 
     public function store(StoreVehicleMakeRequest $request)
     {
-        $vehicleMake = new VehicleMake([
+        VehicleMake::create([
             'title' => $request->title,
         ]);
 
-        $vehicleMake->save();
-
-        return redirect()->route('admin.vehicle-make.index')
+        return redirect()->route('admin.vehicle-makes.index')
             ->with('success', 'Vehicle make added successfully!');
     }
 
@@ -39,13 +37,13 @@ class VehicleMakeController extends Controller
         ]);
     }
 
-    public function update(VehicleMake $make,StoreVehicleMakeRequest $request)
+    public function update(VehicleMake $make, StoreVehicleMakeRequest $request)
     {
         $make->update([
             'title' => $request->title,
         ]);
 
-        return redirect()->route('admin.vehicle-make.index')
+        return redirect()->route('admin.vehicle-makes.index')
             ->with('success', "Vehicle make  {$make->title} updated successfully!");
     }
 
@@ -53,7 +51,7 @@ class VehicleMakeController extends Controller
     {
         $make->delete();
 
-        return redirect()->route('admin.vehicle-make.index')
+        return redirect()->route('admin.vehicle-makes.index')
             ->with('success', "Vehicle make  {$make->title} deleted successfully!");
     }
 }

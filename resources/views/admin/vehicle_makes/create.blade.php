@@ -7,7 +7,7 @@
         </x-slot>
     </div>
     <div class="mx-auto max-w-fit mt-8">
-        <form action="{{ route('admin.vehicle-make.store') }}" method="POST">
+        <form action="{{ route('admin.vehicle-makes.store') }}" method="POST">
             @csrf
 
             <x-form.input name="title" required/>

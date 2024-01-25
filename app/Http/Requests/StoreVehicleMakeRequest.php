@@ -23,7 +23,7 @@ class StoreVehicleMakeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:vehicle_makes,title|string|max:255'
+            'title' => ['required', 'unique:vehicle_makes,title', 'string', 'max:255']
         ];
     }
 }

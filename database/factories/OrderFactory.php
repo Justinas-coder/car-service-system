@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Enums\EnumTrait;
 use App\Enums\OrderStatus;
-use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\VehicleMake;

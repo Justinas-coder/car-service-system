@@ -12,12 +12,12 @@
         <div class="hidden sm:block">
             <div class="">
                 <nav class="flex justify-center space-x-20 " aria-label="Tabs">
-                    <x-admin-nav-link :href="route('admin.vehicle-make.index')"
-                                      :active="request()->routeIs('admin.vehicle-make.index')">
+                    <x-admin-nav-link :href="route('admin.vehicle-makes.index')"
+                                      :active="request()->routeIs('admin.vehicle-makes.index')">
                         {{ __('Vehicle makes and models') }}
                     </x-admin-nav-link>
-                    <x-admin-nav-link :href="route('admin.service.index')"
-                                      :active="request()->routeIs('admin.service.index')">
+                    <x-admin-nav-link :href="route('admin.services.index')"
+                                      :active="request()->routeIs('admin.services.index')">
                         {{ __('Services') }}
                     </x-admin-nav-link>
                 </nav>

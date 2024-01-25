@@ -7,10 +7,10 @@
         </x-slot>
     </div>
     <div class="mx-auto max-w-fit mt-8">
-        <form action="{{ route('admin.service.update', $service->id) }}"
+        <form action="{{ route('admin.services.update', $service->id) }}"
               method="POST">
             @csrf
-            @method('PATCH')
+            @method('PUT')
 
             <x-form.input name="name" :value="old('name', $service->name)" required/>
             <x-form.textarea name="description"
