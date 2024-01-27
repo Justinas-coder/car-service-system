@@ -16,7 +16,7 @@
 </head>
 <body class="antialiased">
 <div
-    class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+    class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
     @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
             @auth
@@ -37,7 +37,7 @@
 
     <div class="relative bg-white">
         <img class="h-56 w-full bg-gray-50 object-cover lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-1/2"
-             src="{{ asset('storage/front_photo.jpg') }}" alt="">
+             src="{{ asset('assets/images/front_photo.jpg') }}" alt="">
         <div class="mx-auto grid max-w-7xl lg:grid-cols-2">
             <div class="px-6 pb-24 pt-16 sm:pb-32 sm:pt-20 lg:col-start-2 lg:px-8 lg:pt-32">
                 <div class="mx-auto max-w-2xl lg:mr-0 lg:max-w-lg">
@@ -68,12 +68,12 @@
                     </dl>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
                         @auth()
-                            <a href="{{ url('/orders/create') }}"
+                            <a href="{{ url('/orders') }}"
                                class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Order Now!
                             </a>
                         @else
-                            <a href="{{ route('register') }}"
+                            <a href="{{ route('login') }}"
                                class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Order Now!
                             </a>

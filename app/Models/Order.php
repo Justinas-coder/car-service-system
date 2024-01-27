@@ -14,11 +14,28 @@ class Order extends Model
         'total_price' => Price::class
     ];
     protected $fillable = [
+        'user_id',
+        'vehicle_make_id',
+        'vehicle_model_id',
+        'year',
+        'service_id',
         'status',
         'total_price'
     ];
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
+    }
+    public function vehicleMake(): BelongsTo
+    {
+        return $this->belongsTo(VehicleMake::class);
+    }
+    public function vehicleModel(): BelongsTo
+    {
+        return $this->belongsTo(VehicleModel::class);
+    }
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
     }
 }

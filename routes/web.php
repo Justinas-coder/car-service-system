@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CurrentOrdersController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
@@ -58,9 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/services/{service}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
 
-    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+    Route::get('/orders/{order}', [CurrentOrdersController::class, 'index'])->name('current.orders.index');
+    Route::put('/orders/{order}', [CurrentOrdersController::class, 'store'])->name('current.orders.store');
+    Route::get('/orders/{order}/edit', [CurrentOrdersController::class, 'edit'])->name('current.orders.edit');
 
 });
 
