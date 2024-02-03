@@ -31,7 +31,8 @@
             <main>
                 {{ $slot }}
             </main>
+            <x-flash/>
+            @include('layouts.footer')
         </div>
-    <x-flash/>
     </body>
 </html>

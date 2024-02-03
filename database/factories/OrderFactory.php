@@ -20,7 +20,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => rand(1,10),
             'vehicle_make_id' => VehicleMake::inRandomOrder()->value('id'),
             'vehicle_model_id' => VehicleModel::inRandomOrder()->value('id'),
             'year' => fake()->year,

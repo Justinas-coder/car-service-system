@@ -59,12 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/services/{service}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
 
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
-
-    Route::get('/orders/{order}', [CurrentOrdersController::class, 'index'])->name('current.orders.index');
-    Route::put('/orders/{order}', [CurrentOrdersController::class, 'store'])->name('current.orders.store');
-    Route::get('/orders/{order}/edit', [CurrentOrdersController::class, 'edit'])->name('current.orders.edit');
+    Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+    Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
 
 });
 

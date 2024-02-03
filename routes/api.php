@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\VehicleModelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('makes/{make}/models', [VehicleModelController::class, 'index'])->name('makes.models.index');
+Route::get('services/{service}', [ServiceController::class, 'show'])->name('services.show');

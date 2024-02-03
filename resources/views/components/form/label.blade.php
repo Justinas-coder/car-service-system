@@ -1,6 +1,6 @@
 @props(['name'])
 
-<label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+<label class="block text-sm font-medium leading-6 text-gray-900"
        for="{{ $name }}"
 >
     {{ ucwords($name) }}

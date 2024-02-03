@@ -6,13 +6,13 @@ enum OrderStatus: string
 {
     use EnumTrait;
     case COMPLETED = 'completed';
-    case IN_PROGRESS = 'in progress';
+    case IN_PROGRESS = 'in_progress';
 
     public function title(): string
     {
         return match ($this) {
-            self::COMPLETED => 'completed',
-            self::IN_PROGRESS => 'in progress',
+            self::COMPLETED => 'Completed',
+            self::IN_PROGRESS => 'In progress',
         };
     }
 }
