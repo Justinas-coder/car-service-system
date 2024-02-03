@@ -80,6 +80,6 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
-        dd('test');
+        dd('deleteing order');
     }
 }
