@@ -35,29 +35,23 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('/admin/vehicle-makes', [VehicleMakeController::class, 'index'])->name('admin.vehicle-makes.index');
-    Route::get('/admin/vehicle-makes/create', [VehicleMakeController::class, 'create'])->name('admin.vehicle-makes.create');
-    Route::get('/admin/vehicle-makes/{make}/edit', [VehicleMakeController::class, 'edit'])->name('admin.vehicle-makes.edit');
-    Route::put('/admin/vehicle-makes/{make}', [VehicleMakeController::class, 'update'])->name('admin.vehicle-makes.update');
-    Route::post('/admin/vehicle-makes', [VehicleMakeController::class, 'store'])->name('admin.vehicle-makes.store');
-    Route::delete('/admin/vehicle-makes/{make}', [VehicleMakeController::class, 'destroy'])->name('admin.vehicle-makes.destroy');
+    Route::get('/vehicle', [VehicleMakeController::class, 'index'])->name('vehicles.index');
+    Route::get('/vehicles/{vehicle}', [VehicleMakeController::class, 'show'])->name('vehicles.show');
+    Route::get('/vehicles/{vehicleMake}/edit', [VehicleMakeController::class, 'edit'])->name('vehicles.edit');
+    Route::delete('/vehicles/{make}', [VehicleMakeController::class, 'destroy'])->name('vehicles.destroy');
+    Route::put('/vehicles/{make}', [VehicleMakeController::class, 'update'])->name('vehicles.update');
 
+    Route::get('/vehicle-makes/vehicle-models/{vehicleModel}/edit', [VehicleModelController::class, 'edit'])->name('vehicle-models.edit');
+    Route::put('/vehicle-makes/vehicle-models/{vehicleModel}', [VehicleModelController::class, 'update'])->name('vehicle-models.update');
+    Route::delete('/vehicle-makes/vehicle-models/{vehicleModel}', [VehicleModelController::class, 'destroy'])->name('vehicleModels.destroy');
 
-    Route::get('/admin/vehicle-makes/{vehicleMake}/models', [VehicleModelController::class, 'index'])->name('admin.vehicle-makes.models.index');
-    Route::get('/admin/vehicle-makes/{vehicleMake}/models/create', [VehicleModelController::class, 'create'])->name('admin.vehicle-makes.models.create');
-    Route::post('/admin/vehicle-makes/{vehicleMake}/models', [VehicleModelController::class, 'store'])->name('admin.vehicle-makes.models.store');
-    Route::get('/admin/vehicle-makes/models/{model}/edit', [VehicleModelController::class, 'edit'])->name('admin.vehicle-makes.models.edit');
-    Route::delete('/admin/vehicle-makes/models/{vehicleModel}', [VehicleModelController::class, 'destroy'])->name('admin.vehicle-makes.models.destroy');
-    Route::put('/admin/vehicle-makes/models/{vehicleModel}', [VehicleModelController::class, 'update'])->name('admin.vehicle-makes.models.update');
-
-
-    Route::get('/admin/services', [ServiceController::class, 'index'])->name('admin.services.index');
-    Route::get('/admin/services/create', [ServiceController::class, 'create'])->name('admin.services.create');
-    Route::get('/admin/services/{service}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
-    Route::post('/admin/services', [ServiceController::class, 'store'])->name('admin.services.store');
-    Route::put('/admin/services/{service}', [ServiceController::class, 'update'])->name('admin.services.update');
-    Route::delete('/admin/services/{service}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
-
+    Route::get('services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::get('services/{service}', [ServiceController::class, 'show'])->name('services.show');
+    Route::get('services/', [ServiceController::class, 'index'])->name('services.index');
+    Route::post('services/', [ServiceController::class, 'store'])->name('services.store');
+    Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+    Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
+    Route::put('services/{service}', [ServiceController::class, 'update'])->name('services.update');
 
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');

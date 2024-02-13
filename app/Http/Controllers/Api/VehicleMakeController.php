@@ -9,25 +9,12 @@ use App\Models\VehicleModel;
 use App\Services\VehicleModelService;
 use Illuminate\Http\Request;
 
-class VehicleModelController extends Controller
+class VehicleMakeController extends Controller
 {
-    protected VehicleModelService $vehicleModelService;
-
-    public function __construct(VehicleModelService $vehicleModelService)
-    {
-        $this->vehicleModelService = $vehicleModelService;
-    }
-
-    public function index(VehicleMake $make)
-    {
-        $vehicleModels = $this->vehicleModelService->getByMake($make->id);
-
-        return VehicleModelResource::collection($vehicleModels);
-    }
-
     public function store(Request $request, VehicleMake $make)
     {
-        $make->models()->create([
+
+        $make->create([
             'title' => $request->title,
         ]);
 

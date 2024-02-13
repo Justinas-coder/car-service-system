@@ -8,8 +8,10 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\VehicleMake;
+use App\Services\ServiceModelService;
 use Illuminate\Http\Request;
 use App\Http\Resources\OrderResource;
+use Illuminate\Support\Str;
 
 
 class OrderController extends Controller
@@ -32,25 +34,24 @@ class OrderController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return view('orders.create-new', [
-            'vehicleMakes' => VehicleMake::all(),
-            'services' => Service::all(),
-        ]);
-    }
-
     public function store(StoreOrderRequest $request)
     {
-        Order::create([
+        $services = explode(',', $request->services);
+
+        $totalPrice = ServiceModelService::calculateTotalPrice($services);
+
+        $order = Order::create([
             'user_id' => auth()->id(),
             'vehicle_make_id' => $request->make_id,
             'vehicle_model_id' => $request->model_id,
             'year' => $request->year,
-            'service_id' => $request->service_id,
             'status' => OrderStatus::IN_PROGRESS,
-            'total_price' => Service::query()->where('id', $request->service_id)->value('price')
+            'total_price' => $totalPrice
         ]);
+
+        foreach ($services as $service) {
+            $order->services()->attach($service);
+        }
 
         return redirect()->route('orders.index')
             ->with('success', 'Order created successfully!');
@@ -59,27 +60,39 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('orders.show', [
-            'order' => $order
+            'order' => $order,
         ]);
     }
 
     public function update(Order $order, Request $request)
     {
+        $services = explode(',', $request->services);
+
+        $totalPrice = ServiceModelService::calculateTotalPrice($services);
 
         $order->update([
             'vehicle_make_id' => $request->make_id,
             'vehicle_model_id' => $request->model_id,
             'year' => $request->years,
-            'service_id' => $request->service_id,
             'status' => $request->status,
+            'total_price' => $totalPrice
         ]);
 
+        $order->services()->detach();
+
+        foreach ($services as $service) {
+            $order->services()->attach($service);
+        }
+
         return redirect()->route('orders.index')
-            ->with('success', "Order  {$order->service->title} updated successfully!");
+            ->with('success', "Order updated successfully!");
     }
 
     public function destroy(Order $order)
     {
-        dd('deleteing order');
+        $order->delete();
+
+        return redirect()->route('orders.index')
+            ->with('success', 'Order deleted successfully!');
     }
 }

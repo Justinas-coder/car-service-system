@@ -21,7 +21,7 @@ class ServiceFactory extends Factory
         return [
             'name' => ucfirst(fake()->word),
             'description' => ucfirst(fake()->sentence),
-            'price' => fake()->randomFloat(2, 20, 200),
+            'price' => fake()->randomFloat(2, 10, 100),
         ];
     }
 }

@@ -24,32 +24,31 @@ class VehicleModelController extends Controller
         ]);
     }
 
-    public function edit(VehicleModel $model)
+    public function edit(VehicleModel $vehicleModel)
     {
-        return view('admin.vehicle_models.edit', [
-            'model' => $model
+        return view('vehicles.models.edit', [
+            'model' => $vehicleModel
         ]);
     }
 
-    public function store(VehicleMake $vehicleMake, StoreVehicleModelRequest $request)
+    public function update(VehicleModel $vehicleModel, StoreVehicleModelRequest $request)
     {
-        $vehicleMake->models()->create([
+        $vehicleModel->update([
             'title' => $request->title,
         ]);
 
-        return redirect()->route('admin.vehicle-makes.models.index', $vehicleMake)->with('success', 'Vehicle model added successfully!');
+        return redirect()->route('vehicles.edit', $vehicleModel->vehicle_make_id)
+            ->with('success', 'Vehicle model updated successfully!');
     }
 
-    public function update(VehicleModel $model, StoreVehicleModelRequest $request)
+    public function destroy(VehicleModel $vehicleModel)
     {
-        $model->update([
-            'title' => $request->title,
-        ]);
+        $vehicleModel->delete();
 
-//        $vehicleMake = $model->make()->id;
+        return redirect()->route('vehicles.edit', $vehicleModel->vehicle_make_id)
+            ->with('success', 'Vehicle model deleted successfully!');
 
-        return redirect()->route('admin.vehicle-makes.models.index', $vehicleMake)
-            ->with('success', 'Vehicle model updated successfully!');    }
+    }
 
 
 }

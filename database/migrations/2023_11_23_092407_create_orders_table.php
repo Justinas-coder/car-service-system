@@ -32,12 +32,7 @@ return new class extends Migration
             $table->integer('year')
                 ->nullable();
 
-            $table->foreignId('service_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
-
-            $table->integer('total_price')
+            $table->bigInteger('total_price')
                 ->nullable();
 
             $table->string('status')

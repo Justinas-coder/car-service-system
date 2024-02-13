@@ -5,8 +5,8 @@
                 <div class="hidden lg:flex lg:gap-x-12">
                     <a href="{{ route('orders.index') }}" class="text-sm font-semibold leading-6 text-gray-900">Orders</a>
                     @if(Gate::allows('isAdmin'))
-                        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Vehicles</a>
-                        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Services</a>
+                        <a href="{{route('vehicles.index') }}" class="text-sm font-semibold leading-6 text-gray-900">Vehicles</a>
+                        <a href="{{route('services.index') }}" class="text-sm font-semibold leading-6 text-gray-900">Services</a>
                     @endif
                 </div>
             </div>

@@ -12,6 +12,7 @@ class VehicleModel extends Model
 
     protected $fillable = [
         'title',
+        'vehicle_make_id'
     ];
 
     public function make(): BelongsTo

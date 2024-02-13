@@ -7,7 +7,7 @@
         </x-slot>
     </div>
     <div class="mx-auto max-w-fit mt-8">
-        <form action="{{ route('admin.vehicle-makes.models.update', $model->id) }}"
+        <form action="{{ route('vehicle-models.update', $model->id) }}"
               method="POST">
             @csrf
             @method('PUT')

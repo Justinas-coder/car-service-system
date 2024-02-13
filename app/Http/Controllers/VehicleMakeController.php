@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicleMakeRequest;
+use App\Models\Order;
+use App\Models\Service;
 use App\Models\VehicleMake;
 use Illuminate\Http\Request;
 
@@ -10,7 +12,7 @@ class VehicleMakeController extends Controller
 {
     public function index()
     {
-        return view('admin.vehicle_makes.index', [
+        return view('vehicles.index', [
             'vehicleMakes' => VehicleMake::all(),
         ]);
     }
@@ -30,10 +32,10 @@ class VehicleMakeController extends Controller
             ->with('success', 'Vehicle make added successfully!');
     }
 
-    public function edit(VehicleMake $make)
+    public function edit(VehicleMake $vehicleMake)
     {
-        return view('admin.vehicle_makes.edit', [
-            'make' => $make
+        return view('vehicles.edit', [
+            'vehicleMake' => $vehicleMake
         ]);
     }
 
@@ -51,7 +53,7 @@ class VehicleMakeController extends Controller
     {
         $make->delete();
 
-        return redirect()->route('admin.vehicle-makes.index')
+        return redirect()->route('vehicles.index')
             ->with('success', "Vehicle make  {$make->title} deleted successfully!");
     }
 }

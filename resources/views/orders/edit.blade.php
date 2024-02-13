@@ -48,29 +48,10 @@
                 </select>
             </div>
             <div class="flex-1 py-3">
-                <x-form.label name="service"/>
-                <select id="service_id" name="service_id" x-model="orderData.service_id"
-                        x-on:change="onServiceChange"
-                        class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        required>
-                    @foreach($services as $service)
-                        <option value="{{ $service->id }}">{{ $service->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="flex-1 py-3">
-                <x-form.label name="description"/>
-                <span
-                    id="description"
-                    x-text="description"
-                    class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    required></span>
-            </div>
-            <div class="flex-1 py-3">
-                <x-form.label name="price"/>
+                <x-form.label name="Total price"/>
                 <span
                     id="price"
-                    x-text="price"
+                    x-text="orderData.total_price"
                     class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     required></span>
             </div>
@@ -94,16 +75,19 @@
                     required></span>
             </div>
 
+            <x-form.multi-select :services="$order->services()->pluck('id')->toArray()" required></x-form.multi-select>
+
             <x-form.button>Update</x-form.button>
         </form>
     </div>
     <script>
         function orderForm() {
             return {
+                // orderData: $order,
                 orderData: @json($order),
                 vehicleModels: [],
                 description: null,
-                price: null,
+                total_price: null,
                 date: null,
 
 
@@ -121,14 +105,11 @@
                     axios.get(`/api/services/${this.orderData.service_id}`)
                         .then(res => {
                             this.description = res.data.data.description;
-                            this.price = res.data.data.price;
                         });
                 },
                 initForm() {
-                    this.description = this.orderData.service.description;
-                    this.price = this.orderData.service.price;
                     this.date = this.orderData.order_date;
-                    console.log(this.date)
+                    console.log(this.orderData)
 
                     this.getModelsForMake(this.orderData.vehicle_make_id)
                 },

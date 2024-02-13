@@ -9,14 +9,21 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return view('admin.services.index', [
+        return view('services.index', [
             'services' => Service::all()
         ]);
     }
 
     public function create()
     {
-        return view('admin.services.create');
+        return view('services.create');
+    }
+
+    public function show(Service $service)
+    {
+        return view('services.show', [
+            'service' => $service
+        ]);
     }
 
     public function store(StoreServiceRequest $request)
@@ -27,12 +34,12 @@ class ServiceController extends Controller
             'price' => $request->price,
         ]);
 
-        return redirect()->route('admin.services.index')->with('success', 'Service added successfully!');
+        return redirect()->route('services.index')->with('success', 'Service added successfully!');
     }
 
     public function edit(Service $service)
     {
-        return view('admin.services.edit', [
+        return view('services.edit', [
             'service' => $service
         ]);
     }
@@ -46,16 +53,17 @@ class ServiceController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.services.index')
+            ->route('services.index')
             ->with('success', "Service  {$service->name} updated successfully!");
     }
 
     public function destroy(Service $service)
     {
+
         $service->delete();
 
         return redirect()
-            ->route('admin.services.index')
+            ->route('services.index')
             ->with('success', "Service  {$service->name} deleted successfully!");
     }
 }

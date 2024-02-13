@@ -6,6 +6,8 @@ use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 class Order extends Model
 {
     use HasFactory;
@@ -18,7 +20,6 @@ class Order extends Model
         'vehicle_make_id',
         'vehicle_model_id',
         'year',
-        'service_id',
         'status',
         'total_price'
     ];
@@ -34,8 +35,8 @@ class Order extends Model
     {
         return $this->belongsTo(VehicleModel::class);
     }
-    public function service(): BelongsTo
+    public function services(): BelongsToMany
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsToMany(Service::class);
     }
 }
