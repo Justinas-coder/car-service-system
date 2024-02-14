@@ -27,4 +27,3 @@ Route::post('makes/{make}/models', [VehicleModelController::class, 'store'])->na
 Route::post('makes/', [VehicleMakeController::class, 'store'])->name('makes.store');
 
 Route::get('services', [ServiceModelController::class, 'index'])->name('services.index');
-//Route::get('orders/$(order_id)/services', [ServiceModelController::class, 'show'])->name('services.show');

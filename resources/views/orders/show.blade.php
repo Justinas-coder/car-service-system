@@ -38,13 +38,10 @@
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->status }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->created_at }}</td>
             </tr>
-
-            <!-- More people... -->
             </tbody>
         </table>
 
     </div>
-
 </x-app-layout>
 
 

@@ -33,32 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('vehicles', VehicleMakeController::class)->except(['store']);
 
-    Route::get('/vehicle', [VehicleMakeController::class, 'index'])->name('vehicles.index');
-    Route::get('/vehicles/{vehicle}', [VehicleMakeController::class, 'show'])->name('vehicles.show');
-    Route::get('/vehicles/{vehicleMake}/edit', [VehicleMakeController::class, 'edit'])->name('vehicles.edit');
-    Route::delete('/vehicles/{make}', [VehicleMakeController::class, 'destroy'])->name('vehicles.destroy');
-    Route::put('/vehicles/{make}', [VehicleMakeController::class, 'update'])->name('vehicles.update');
+    Route::resource('models', VehicleModelController::class)->only(['edit', 'update', 'destroy']);
 
-    Route::get('/vehicle-makes/vehicle-models/{vehicleModel}/edit', [VehicleModelController::class, 'edit'])->name('vehicle-models.edit');
-    Route::put('/vehicle-makes/vehicle-models/{vehicleModel}', [VehicleModelController::class, 'update'])->name('vehicle-models.update');
-    Route::delete('/vehicle-makes/vehicle-models/{vehicleModel}', [VehicleModelController::class, 'destroy'])->name('vehicleModels.destroy');
+    Route::resource('services', ServiceController::class);
 
-    Route::get('services/create', [ServiceController::class, 'create'])->name('services.create');
-    Route::get('services/{service}', [ServiceController::class, 'show'])->name('services.show');
-    Route::get('services/', [ServiceController::class, 'index'])->name('services.index');
-    Route::post('services/', [ServiceController::class, 'store'])->name('services.store');
-    Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
-    Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
-    Route::put('services/{service}', [ServiceController::class, 'update'])->name('services.update');
-
-    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
-    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
-    Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
-    Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+    Route::resource('orders', OrderController::class);
 
 });
 

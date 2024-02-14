@@ -9,46 +9,28 @@ use Illuminate\Http\Request;
 
 class VehicleModelController extends Controller
 {
-    public function index(VehicleMake $vehicleMake)
-    {
-        return view('admin.vehicle_models.index', [
-            'make' => $vehicleMake,
-            'vehicle_models' => $vehicleMake->models()->get()->all(),
-        ]);
-    }
-
-    public function create(VehicleMake $vehicleMake)
-    {
-        return view('admin.vehicle_models.create', [
-            'make' => $vehicleMake
-        ]);
-    }
-
-    public function edit(VehicleModel $vehicleModel)
+    public function edit(VehicleModel $model)
     {
         return view('vehicles.models.edit', [
-            'model' => $vehicleModel
+            'model' => $model
         ]);
     }
 
-    public function update(VehicleModel $vehicleModel, StoreVehicleModelRequest $request)
+    public function update(VehicleModel $model, StoreVehicleModelRequest $request)
     {
-        $vehicleModel->update([
+        $model->update([
             'title' => $request->title,
         ]);
 
-        return redirect()->route('vehicles.edit', $vehicleModel->vehicle_make_id)
+        return redirect()->route('vehicles.edit', $model->vehicle_make_id)
             ->with('success', 'Vehicle model updated successfully!');
     }
 
-    public function destroy(VehicleModel $vehicleModel)
+    public function destroy(VehicleModel $model)
     {
-        $vehicleModel->delete();
+        $model->delete();
 
-        return redirect()->route('vehicles.edit', $vehicleModel->vehicle_make_id)
+        return redirect()->route('vehicles.edit', $model->vehicle_make_id)
             ->with('success', 'Vehicle model deleted successfully!');
-
     }
-
-
 }

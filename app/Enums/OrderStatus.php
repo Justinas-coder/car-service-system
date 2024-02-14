@@ -11,8 +11,8 @@ enum OrderStatus: string
     public function title(): string
     {
         return match ($this) {
-            self::COMPLETED => 'Completed',
-            self::IN_PROGRESS => 'In progress',
+            self::COMPLETED => 'completed',
+            self::IN_PROGRESS => 'in_progress',
         };
     }
 }

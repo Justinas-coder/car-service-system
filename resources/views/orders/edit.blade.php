@@ -83,13 +83,11 @@
     <script>
         function orderForm() {
             return {
-                // orderData: $order,
                 orderData: @json($order),
                 vehicleModels: [],
                 description: null,
                 total_price: null,
                 date: null,
-
 
                 getModelsForMake(make) {
                     axios.get(`/api/makes/${make}/models`)
@@ -109,15 +107,9 @@
                 },
                 initForm() {
                     this.date = this.orderData.order_date;
-                    console.log(this.orderData)
-
                     this.getModelsForMake(this.orderData.vehicle_make_id)
                 },
             }
         }
     </script>
 </x-app-layout>
-
-
-
-

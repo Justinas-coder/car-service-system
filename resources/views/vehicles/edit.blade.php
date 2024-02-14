@@ -55,13 +55,13 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-500">{{ $model->created_at ?? ''}}</td>
                                         @if(Gate::allows('isAdmin'))
                                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-3">
-                                                <a href="{{ route('vehicle-models.edit', $model->id) }}"
+                                                <a href="{{ route('models.edit', $model->id) }}"
                                                    class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                             </td>
                                             <td class="relative whitespace-nowrap py-4 pr-4 text-center text-sm font-medium sm:pr-3">
                                                 <form id="delete-model-{{ $model->id }}"
                                                       method="POST"
-                                                      action="{{ route('vehicleModels.destroy', $model->id) }}">
+                                                      action="{{ route('models.destroy', $model->id) }}">
                                                     @csrf
                                                     @method('DELETE')
 
@@ -101,7 +101,6 @@
                     axios.post('/api/makes/' + this.vehicleMake + '/models', {title: this.vehicleModel})
                         .then(response => {
                             window.location.reload()
-                            console.log(response.data);
                         }).catch(error => {
                         console.error(error.response.data);
                     });

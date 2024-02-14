@@ -32,28 +32,29 @@ class VehicleMakeController extends Controller
             ->with('success', 'Vehicle make added successfully!');
     }
 
-    public function edit(VehicleMake $vehicleMake)
+    public function edit(VehicleMake $vehicle)
     {
+
         return view('vehicles.edit', [
-            'vehicleMake' => $vehicleMake
+            'vehicleMake' => $vehicle
         ]);
     }
 
-    public function update(VehicleMake $make, StoreVehicleMakeRequest $request)
+    public function update(VehicleMake $vehicle, StoreVehicleMakeRequest $request)
     {
-        $make->update([
+        $vehicle->update([
             'title' => $request->title,
         ]);
 
         return redirect()->route('admin.vehicle-makes.index')
-            ->with('success', "Vehicle make  {$make->title} updated successfully!");
+            ->with('success', "Vehicle make  {$vehicle->title} updated successfully!");
     }
 
-    public function destroy(VehicleMake $make)
+    public function destroy(VehicleMake $vehicle)
     {
-        $make->delete();
+        $vehicle->delete();
 
         return redirect()->route('vehicles.index')
-            ->with('success', "Vehicle make  {$make->title} deleted successfully!");
+            ->with('success', "Vehicle make  {$vehicle->title} deleted successfully!");
     }
 }

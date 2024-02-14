@@ -38,7 +38,7 @@ class OrderController extends Controller
     {
         $services = explode(',', $request->services);
 
-        $totalPrice = ServiceModelService::calculateTotalPrice($services);
+        $totalPrice = (new ServiceModelService())->calculateTotalPrice($services);
 
         $order = Order::create([
             'user_id' => auth()->id(),
@@ -68,7 +68,7 @@ class OrderController extends Controller
     {
         $services = explode(',', $request->services);
 
-        $totalPrice = ServiceModelService::calculateTotalPrice($services);
+        $totalPrice = (new ServiceModelService())->calculateTotalPrice($services);
 
         $order->update([
             'vehicle_make_id' => $request->make_id,

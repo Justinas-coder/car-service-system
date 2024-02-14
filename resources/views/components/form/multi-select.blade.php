@@ -31,8 +31,6 @@
             },
             init() {
                 this.loadOptions();
-                console.log(this.value)
-                console.log(this.options)
 
                 this.$nextTick(() => {
                     let choices = new Choices(this.$refs.select, {

@@ -12,9 +12,8 @@
 
             <x-form.input name="name" required />
             <x-form.textarea name="description" />
-            <x-form.input name="price" required />
+            <x-form.input-integer name="price" required />
             <x-form.button>Save</x-form.button>
         </form>
-
     </div>
 </x-app-layout>

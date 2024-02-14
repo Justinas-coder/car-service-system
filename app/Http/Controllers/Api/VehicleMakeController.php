@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\VehicleMakeResource;
 use App\Http\Resources\VehicleModelResource;
 use App\Models\VehicleMake;
 use App\Models\VehicleModel;
@@ -13,14 +14,10 @@ class VehicleMakeController extends Controller
 {
     public function store(Request $request, VehicleMake $make)
     {
-
-        $make->create([
+        $newMake = $make->create([
             'title' => $request->title,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Model successfully added '
-        ]);
+        return new VehicleMakeResource($newMake);
     }
 }

@@ -27,13 +27,10 @@ class VehicleModelController extends Controller
 
     public function store(Request $request, VehicleMake $make)
     {
-        $make->models()->create([
+        $newModel = $make->models()->create([
             'title' => $request->title,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Model successfully added '
-        ]);
+        return new VehicleModelResource($newModel);
     }
 }

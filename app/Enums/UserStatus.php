@@ -11,7 +11,7 @@ enum UserStatus: string
     public function title(): string
     {
         return match ($this) {
-            self::ADMIN => 'admin',
+            self::ADMIN => 'Admin',
             self::USER => 'user',
         };
     }
