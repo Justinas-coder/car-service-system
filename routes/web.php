@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CurrentOrdersController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\VehicleMakeController;
+use App\Http\Controllers\VehicleModelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,11 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('vehicles', VehicleMakeController::class)->except(['store']);
 
-    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::resource('models', VehicleModelController::class)->only(['edit', 'update', 'destroy']);
+
+    Route::resource('services', ServiceController::class);
+
+    Route::resource('orders', OrderController::class);
 
 });
 

@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #333;
+}
+
+.svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+}
+
+.choices__list--multiple .choices__item {
+    background-color: #4a90e2; /* Set the background color for selected items */
+    color: #fff;
+    border-radius: 8px;
+}
+
+.choices {
+@apply mb-0
+}
