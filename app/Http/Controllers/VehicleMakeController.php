@@ -12,7 +12,7 @@ class VehicleMakeController extends Controller
 {
     public function index()
     {
-        return view('vehicles.index', [
+        return view('vehicle.index', [
             'vehicleMakes' => VehicleMake::all(),
         ]);
     }
@@ -35,7 +35,7 @@ class VehicleMakeController extends Controller
     public function edit(VehicleMake $vehicle)
     {
 
-        return view('vehicles.edit', [
+        return view('vehicle.edit', [
             'vehicleMake' => $vehicle
         ]);
     }

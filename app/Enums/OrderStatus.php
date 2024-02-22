@@ -7,12 +7,14 @@ enum OrderStatus: string
     use EnumTrait;
     case COMPLETED = 'completed';
     case IN_PROGRESS = 'in_progress';
+    case NOT_PAID = 'not_paid';
 
     public function title(): string
     {
         return match ($this) {
-            self::COMPLETED => 'completed',
-            self::IN_PROGRESS => 'in_progress',
+            self::COMPLETED => __('completed'),
+            self::IN_PROGRESS => __('in_progress'),
+            self::NOT_PAID => __('not_paid'),
         };
     }
 }

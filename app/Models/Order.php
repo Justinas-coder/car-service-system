@@ -13,7 +13,8 @@ class Order extends Model
     use HasFactory;
     protected $casts = [
         'status' => OrderStatus::class,
-        'total_price' => Price::class
+        'total_price' => Price::class,
+        'total_tax' => Price::class
     ];
     protected $fillable = [
         'user_id',
@@ -21,7 +22,8 @@ class Order extends Model
         'vehicle_model_id',
         'year',
         'status',
-        'total_price'
+        'total_price',
+        'total_tax'
     ];
     public function user(): BelongsTo
     {

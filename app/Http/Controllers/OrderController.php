@@ -18,19 +18,19 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return view('orders.index', [
+        return view('order.index', [
             'orders' => Order::query()->where('user_id', auth()->id())->get(),
             'vehicleMakes' => VehicleMake::all(),
-            'services' => Service::all(),
+            'service' => Service::all(),
         ]);
     }
 
     public function edit(Order $order)
     {
-        return view('orders.edit', [
+        return view('order.edit', [
             'order' => new OrderResource($order),
             'vehicleMakes' => VehicleMake::all(),
-            'services' => Service::all(),
+            'service' => Service::all(),
         ]);
     }
 
@@ -45,8 +45,9 @@ class OrderController extends Controller
             'vehicle_make_id' => $request->make_id,
             'vehicle_model_id' => $request->model_id,
             'year' => $request->year,
-            'status' => OrderStatus::IN_PROGRESS,
-            'total_price' => $totalPrice
+            'status' => OrderStatus::NOT_PAID,
+            'total_price' => $totalPrice,
+            'total_tax' => $totalPrice * 0.21
         ]);
 
         foreach ($services as $service) {
@@ -59,7 +60,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return view('orders.show', [
+        return view('order.show', [
             'order' => $order,
         ]);
     }
