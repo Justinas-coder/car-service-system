@@ -11,9 +11,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 
-
-
-
 class InvoiceEmail extends Mailable
 {
     use Queueable, SerializesModels;
