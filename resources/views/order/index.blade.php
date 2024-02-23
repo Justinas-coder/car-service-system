@@ -3,7 +3,6 @@
         {{ 'Create new order' }}
     </x-page-section-header>
 
-
     <div x-data="orderForm"
          x-on:open-modal.window="openDeleteModal = true"
          x-on:keyup.escape.window="openDeleteModal = false"
@@ -131,16 +130,13 @@
                                     <a class="px-4 py-1.5 bg-green-600 text-white rounded-md hover:bg-green-700">Paid</a>
                                 </td>
                             @endif
-
                         </tr>
-
                     @endforeach
                     </tbody>
                 </table>
             @else
                 <p>No orders found.</p>
             @endif
-
         </div>
     </div>
 

@@ -6,7 +6,6 @@
             </h2>
         </x-slot>
     </div>
-
     <div class="mx-auto w-full sm:w-2/3 mt-8">
         <table class="flex-1 min-w-full divide-y divide-gray-300">
             <thead>
@@ -33,9 +32,7 @@
             </tr>
             </tbody>
         </table>
-
     </div>
-
 </x-app-layout>
 
 

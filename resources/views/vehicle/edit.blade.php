@@ -105,7 +105,6 @@
                         console.error(error.response.data);
                     });
                 },
-
                 deleteRecord() {
                     document.querySelector(`#delete-model-${this.selectedModel}`).submit();
                 },

@@ -6,208 +6,108 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        body {
-            background-color: #f9fafb;
-            color: #111827;
-        }
-
-        .invoice-container {
-            max-width: 85rem;
-            padding: 1.5rem;
-            margin: 4rem auto;
-        }
-
-        .card {
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-            background-color: #fff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border-radius: 0.75rem;
-        }
-
-        .card h1 {
-            margin-top: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #2563eb;
-        }
-
-        .card h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #4b5563;
-        }
-
-        .address {
-            margin-top: 1rem;
-            font-style: italic;
-            color: #4b5563;
-        }
-
-        .grid-container {
-            margin-top: 1rem;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .date-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 1rem;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #d1d5db;
-        }
-
-        .flex-container {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .flex-container dl {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0.5rem;
-        }
-
-        .thank-you {
-            margin-top: 1.5rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #4b5563;
-        }
-
-        .contact-info {
-            margin-top: 0.5rem;
-            color: #4b5563;
-        }
-
-        .copyright {
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-
-        .buttons-container {
-            margin-top: 0.75rem;
-            display: flex;
-            gap: 0.75rem;
-            justify-content: flex-end;
-        }
-
-        .button {
-            padding: 0.5rem 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .flex-container {
-            display: flex;
-            justify-content: flex-end; /* Align items to the end (right side) of the flex container */
-        }
-
-        .pdf-button {
-            background-color: #fff;
-            color: #374151;
-        }
-
-        .print-button {
-            background-color: #2563eb;
-            color: #fff;
-        }
-    </style>
 </head>
-<body>
-<div class="invoice-container">
-    <div class="card">
-        <h1>Car Service System.</h1>
-        <div class="flex-container ">
-            <div>
-                <h2>Invoice # {{ $order->id }}</h2>
-                <span>3682303</span>
-                <address class="address">
-                    Motor street<br>
-                    128 a. Block 8a.<br>
-                    Vilnius, Lithuania, 920567<br>
-                </address>
+<body class="bg-gray-50 dark:bg-slate-900">
+<div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto my-4 sm:my-10">
+    <div class="sm:w-11/12 lg:w-3/4 mx-auto">
+        <div class="flex flex-col p-4 sm:p-10 bg-white shadow-md rounded-xl dark:bg-gray-800">
+            <div class="flex justify-between">
+                <div>
+                    <h1 class="mt-2 text-lg md:text-xl font-semibold text-blue-600 dark:text-white">Car Service
+                        System.</h1>
+                </div>
+                <div class="text-end">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">Invoice
+                        # {{ $order->id }}</h2>
+                    <span class="mt-1 block text-gray-500">3682303</span>
+                    <address class="mt-4 not-italic text-gray-800 dark:text-gray-200"
+                    >
+                        Motor street<br>
+                        128 a. Block 8a.<br>
+                        Vilnius, Lithuania, 920567<br>
+                    </address>
+                </div>
             </div>
-        </div>
-        <div class="grid-container">
-            <div>
-                <h3>Bill to:</h3>
-                <h3>Car Service System</h3>
-                <address class="address">
-                    Motor street,<br>
-                    128 a. Block 8a<br>
-                    Vilnius, Lithuania, 920567<br>
-                    Bank Swedbank A/N LT342342343234<br>
-                </address>
+            <div class="mt-8 grid sm:grid-cols-2 gap-3">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Bill to:</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Car Service System</h3>
+                    <address class="mt-2 not-italic text-gray-500">
+                        Motor street,<br>
+                        128 a. Block 8a<br>
+                        Vilnius, Lithuania, 920567<br>
+                        Bank Swedbank A/N LT342342343234<br>
+                    </address>
+                </div>
+                <!-- Col -->
+                <div class="sm:text-end space-y-2">
+                    <!-- Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
+                        <dl class="grid sm:grid-cols-5 gap-x-3">
+                            <dt class="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Invoice date:</dt>
+                            <dd class="col-span-2 text-gray-500">{{ now()->format('Y-m-d') }}</dd>
+                        </dl>
+                        <dl class="grid sm:grid-cols-5 gap-x-3">
+                            <dt class="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Due date:</dt>
+                            <dd class="col-span-2 text-gray-500">{{ now()->addWeek()->format('Y-m-d') }}</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
-            <div class="date-container">
-                <dl>
-                    <dt>Invoice date:</dt>
-                    <dd>{{ now()->format('Y-m-d') }}</dd>
-                </dl>
-                <dl>
-                    <dt>Due date:</dt>
-                    <dd>{{ now()->addWeek()->format('Y-m-d') }}</dd>
-                </dl>
+            <div class="mt-6">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th scope="col"
+                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Service
+                                Name
+                            </th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                Description
+                            </th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        @foreach($order->services as $service)
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                    {{ $service->name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $service->description }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $service->price }}</td>
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <table>
-            <thead>
-            <tr>
-                <th>Service Name</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($order->services as $service)
-                <tr>
-                    <td>{{ $service->name }}</td>
-                    <td>{{ $service->description }}</td>
-                    <td>{{ $service->price }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        <div class="flex-container">
-            <div class="w-full max-w-2xl sm-text-end">
-                <dl class="flex-container">
-                    <dt>Tax:</dt>
-                    <dd>{{ $order->total_tax }}</dd>
-                </dl>
-                <dl class="date-container">
-                    <dt>Total:</dt>
-                    <dd>{{ $order->total_price }}</dd>
-                </dl>
+            <div class="mt-8 flex sm:justify-end">
+                <div class="w-full max-w-2xl sm:text-end space-y-2">
+                    <dl class="grid sm:grid-cols-5 gap-x-3">
+                        <dt class="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Tax:</dt>
+                        <dd class="col-span-2 text-gray-500">{{ $order->total_tax }}</dd>
+                    </dl>
+                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
+                        <dl class="grid sm:grid-cols-5 gap-x-3">
+                            <dt class="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Total:</dt>
+                            <dd class="col-span-2 text-gray-500">{{ $order->total_price }}</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
+            <div class="mt-8 sm:mt-12">
+                <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Thank you!</h4>
+                <p class="text-gray-500">If you have any questions concerning this invoice, use the following contact
+                    information:</p>
+                <div class="mt-2">
+                    <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">{{ config('mail.from.primary') }}</p>
+                    <p class="block text-sm font-medium text-gray-800 dark:text-gray-200">+1 (062) 109-9222</p>
+                </div>
+            </div>
+            <p class="mt-5 text-sm text-gray-500">© {{ now()->format('Y') }} {{ config('app.name') }}.</p>
         </div>
-        <div class="thank-you">Thank you!</div>
-        <p>If you have any questions concerning this invoice, use the following contact information:</p>
-        <div class="contact-info">
-            <p>{{ config('mail.from.primary') }}</p>
-            <p>+1 (062) 109-9222</p>
-        </div>
-        <p class="copyright">© {{ now()->format('Y') }} {{ config('app.name') }}.</p>
     </div>
 </div>
 </body>
-</html>

@@ -9,6 +9,9 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
+
+
 
 
 class InvoiceEmail extends Mailable
@@ -20,11 +23,9 @@ class InvoiceEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Order $order)
-    {
-    }
-
-
+    public function __construct(
+        public Order $order,
+    ){}
 
     /**
      * Get the message envelope.
@@ -54,6 +55,13 @@ class InvoiceEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+//        $pdfPath = "app/{$this->order->id}.pdf";
+//
+//        return [
+//            Attachment::fromStorage($pdfPath),
+//        ];
+        return [
+            Attachment::fromPath(storage_path("app/{$this->order->id}.pdf")),
+        ];
     }
 }

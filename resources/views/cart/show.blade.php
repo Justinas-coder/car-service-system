@@ -6,7 +6,6 @@
             </h2>
         </x-slot>
     </div>
-
     <main class="mx-auto max-w-2xl pb-24 pt-8 sm:px-6 sm:pt-16 lg:max-w-7xl lg:px-8">
         <div class="space-y-2 px-4 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 sm:px-0">
             <div class="flex sm:items-baseline sm:space-x-4">
@@ -17,7 +16,8 @@
                 </a>
             </div>
             <p class="text-sm text-gray-600">Order placed
-                <time datetime="2021-03-22" class="font-medium text-gray-900">{{ $order->created_at->format('Y-m-d') }}</time>
+                <time datetime="2021-03-22"
+                      class="font-medium text-gray-900">{{ $order->created_at->format('Y-m-d') }}</time>
             </p>
             <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:hidden">
                 View invoice
@@ -28,13 +28,20 @@
         <!-- Products -->
         <section aria-labelledby="products-heading" class="mt-6">
             <h2 id="products-heading" class="sr-only">Products purchased</h2>
-
             <table class="min-w-full divide-y divide-gray-300">
                 <thead>
                 <tr>
-                    <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Service Name</th>
-                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Description</th>
-                    <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Price</th>
+                    <th scope="col"
+                        class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
+                        Service Name
+                    </th>
+                    <th scope="col"
+                        class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
+                        Description
+                    </th>
+                    <th scope="col"
+                        class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Price
+                    </th>
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
@@ -45,7 +52,6 @@
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $service->price }} Eur</td>
                     </tr>
                 @endforeach
-
                 </tbody>
             </table>
 
@@ -74,7 +80,7 @@
                         </div>
                         <div class="mt-4">
                             <a href="{{ route('cart.show', $order->id) }}"
-                            class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                               class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >Pay Now</a>
                         </div>
                     </div>

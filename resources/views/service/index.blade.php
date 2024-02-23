@@ -28,10 +28,7 @@
                     </button>
                 </a>
             </div>
-
         </div>
-
-
         <div class="mx-auto w-full sm:w-2/3 mt-8">
             @if(count($services) > 0)
                 <table class="min-w-full divide-y divide-gray-200">
@@ -59,21 +56,20 @@
                                         @method('DELETE')
 
                                     </form>
-                                    <x-danger-button @click="selectedService = {{ $service->id }};openDeleteModal = true;"
-                                                     class="inline-flex items-center rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
+                                    <x-danger-button
+                                        @click="selectedService = {{ $service->id }};openDeleteModal = true;"
+                                        class="inline-flex items-center rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
                                         Delete
                                     </x-danger-button>
                                 </td>
                             @endif
                         </tr>
-
                     @endforeach
                     </tbody>
                 </table>
             @else
                 <p>No orders found.</p>
             @endif
-
         </div>
     </div>
 
