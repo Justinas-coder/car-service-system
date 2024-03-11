@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('orders', OrderController::class);
 
-Route::get('/invoice-send/{order}', [InvoiceController::class, 'sendInvoiceEmail'])->name('invoice.invoice-send');
+Route::get('/{order}/invoice-send', [InvoiceController::class, 'sendInvoiceEmail'])->name('invoice.invoice-send');
 
 });
 

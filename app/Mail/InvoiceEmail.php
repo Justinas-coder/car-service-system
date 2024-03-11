@@ -52,11 +52,6 @@ class InvoiceEmail extends Mailable
      */
     public function attachments(): array
     {
-//        $pdfPath = "app/{$this->order->id}.pdf";
-//
-//        return [
-//            Attachment::fromStorage($pdfPath),
-//        ];
         return [
             Attachment::fromPath(storage_path("app/{$this->order->id}.pdf")),
         ];

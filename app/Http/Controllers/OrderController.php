@@ -21,7 +21,7 @@ class OrderController extends Controller
         return view('order.index', [
             'orders' => Order::query()->where('user_id', auth()->id())->get(),
             'vehicleMakes' => VehicleMake::all(),
-            'service' => Service::all(),
+            'services' => Service::all(),
         ]);
     }
 
@@ -30,7 +30,7 @@ class OrderController extends Controller
         return view('order.edit', [
             'order' => new OrderResource($order),
             'vehicleMakes' => VehicleMake::all(),
-            'service' => Service::all(),
+            'services' => Service::all(),
         ]);
     }
 
