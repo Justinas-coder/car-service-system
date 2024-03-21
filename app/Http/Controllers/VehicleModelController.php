@@ -11,7 +11,7 @@ class VehicleModelController extends Controller
 {
     public function edit(VehicleModel $model)
     {
-        return view('vehicles.models.edit', [
+        return view('vehicle.models.edit', [
             'model' => $model
         ]);
     }

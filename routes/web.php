@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CurrentOrdersController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
@@ -33,6 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+    Route::get('/cart/{order}', [CartController::class, 'show'])->name('cart.show');
+
+
     Route::resource('vehicles', VehicleMakeController::class)->except(['store']);
 
     Route::resource('models', VehicleModelController::class)->only(['edit', 'update', 'destroy']);
@@ -40,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('services', ServiceController::class);
 
     Route::resource('orders', OrderController::class);
+
+Route::get('/{order}/invoice-send', [InvoiceController::class, 'sendInvoiceEmail'])->name('invoice.invoice-send');
 
 });
 

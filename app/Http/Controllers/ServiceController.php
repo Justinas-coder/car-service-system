@@ -9,19 +9,19 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return view('services.index', [
+        return view('service.index', [
             'services' => Service::all()
         ]);
     }
 
     public function create()
     {
-        return view('services.create');
+        return view('service.create');
     }
 
     public function show(Service $service)
     {
-        return view('services.show', [
+        return view('service.show', [
             'service' => $service
         ]);
     }
@@ -39,7 +39,7 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        return view('services.edit', [
+        return view('service.edit', [
             'service' => $service
         ]);
     }

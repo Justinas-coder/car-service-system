@@ -83,7 +83,6 @@
             @else
                 <p>No vehicles found.</p>
             @endif
-
         </div>
     </div>
 

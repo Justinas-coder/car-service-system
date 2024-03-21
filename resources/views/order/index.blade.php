@@ -3,7 +3,6 @@
         {{ 'Create new order' }}
     </x-page-section-header>
 
-
     <div x-data="orderForm"
          x-on:open-modal.window="openDeleteModal = true"
          x-on:keyup.escape.window="openDeleteModal = false"
@@ -120,15 +119,24 @@
                                     </x-danger-button>
                                 </td>
                             @endif
+                            @if($order->status === App\Enums\OrderStatus::NOT_PAID)
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-3">
+                                    <a href="{{ route('cart.show', $order->id) }}"
+                                       class="px-4 py-1.5 bg-purple-800 text-white rounded-md hover:bg-blue-700">Check
+                                        out</a>
+                                </td>
+                            @else
+                                <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-3">
+                                    <a class="px-4 py-1.5 bg-green-600 text-white rounded-md hover:bg-green-700">Paid</a>
+                                </td>
+                            @endif
                         </tr>
-
                     @endforeach
                     </tbody>
                 </table>
             @else
                 <p>No orders found.</p>
             @endif
-
         </div>
     </div>
 

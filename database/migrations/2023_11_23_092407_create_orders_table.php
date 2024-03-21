@@ -35,6 +35,9 @@ return new class extends Migration
             $table->bigInteger('total_price')
                 ->nullable();
 
+            $table->bigInteger('total_tax')
+                ->nullable();
+
             $table->string('status')
                 ->nullable();
 

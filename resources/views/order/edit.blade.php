@@ -10,7 +10,6 @@
     <div class="mx-auto sm:w-1/3 mt-8">
         <form method="POST" action="{{ route('orders.update', $order->id) }}" enctype="multipart/form-data"
               x-data="orderForm" x-init="initForm">
-
             @csrf
             @method('PUT')
 
@@ -62,7 +61,8 @@
                         class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         required>
                     @foreach(\App\Enums\OrderStatus::options() as $key => $value)
-                        <option value="{{ $key }}" @if($order->status->value === $key) selected @endif>{{ $value }}</option>
+                        <option value="{{ $key }}"
+                                @if($order->status->value === $key) selected @endif>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
