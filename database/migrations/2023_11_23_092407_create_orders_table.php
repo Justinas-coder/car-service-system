@@ -32,6 +32,9 @@ return new class extends Migration
             $table->integer('year')
                 ->nullable();
 
+            $table->string('session_id')
+                ->nullable();
+
             $table->bigInteger('total_price')
                 ->nullable();
 
