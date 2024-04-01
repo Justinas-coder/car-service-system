@@ -34,9 +34,8 @@ class CarSeeder extends Seeder
             ]);
 
             foreach ($models as $modelName) {
-                VehicleModel::create([
+                $make->models()->create([
                     'title' => $modelName,
-                    'vehicle_make_id' => $make->id,
                 ]);
             }
         }

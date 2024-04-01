@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use App\Services\StripeService;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\StripeClient;
@@ -20,9 +21,9 @@ class CartController extends Controller
 
     public function checkout(Order $order)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        Stripe::setApiKey(config('services.stripe.key'));
 
-        $stripe = new StripeClient(env('STRIPE_SECRET_KEY'));
+        $stripe = new StripeClient(config('services.stripe.key'));
 
         $lineItems = [];
 
@@ -55,7 +56,7 @@ class CartController extends Controller
 
     public function success(Request $request)
     {
-        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
+        $stripe = new \Stripe\StripeClient(config('services.stripe.key'));
 
         $sessionId = $request->get('session_id');
 
@@ -89,8 +90,8 @@ class CartController extends Controller
 
     public function webhook()
     {
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
-        $endpoint_secret = env('STRIPE_WEBHOOK_SECRET');
+        // This is your Stripe CLI webhook secret for testing your endpoint locally.
+        $endpoint_secret = env('STRIPE_WEBHOOK_ET');
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -126,5 +127,7 @@ class CartController extends Controller
         }
 
         return response('');
+
+
     }
 }

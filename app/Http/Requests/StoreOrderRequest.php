@@ -25,7 +25,7 @@ class StoreOrderRequest extends FormRequest
             'make_id' => ['required'],
             'model_id' => ['required'],
             'year' => ['required', 'int'],
-            'services' => ['required'],
+            'services' => ['required' ],
         ];
     }
 }
