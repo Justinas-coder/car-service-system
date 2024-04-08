@@ -68,7 +68,6 @@ describe('test order actions perform successful', function () {
 
         $response = $this->patch(route('orders.update', ['order' => $order->id]), ['status' => \App\Enums\OrderStatus::COMPLETED->value, 'year' => 2002]);
 
-
         $response->assertRedirect();
 
         $this->assertDatabaseHas('orders', ['id' => $order->id, 'status' => \App\Enums\OrderStatus::COMPLETED->value, 'year' => 2002]);

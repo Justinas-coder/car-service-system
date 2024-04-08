@@ -8,7 +8,6 @@ use App\Models\VehicleMake;
 use function Pest\Laravel\{actingAs};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-
 beforeEach(function () {
     $this->service = Service::factory()->createOne();
 
@@ -26,13 +25,12 @@ beforeEach(function () {
 
 describe('test order posted to stripe checkout successful', function () {
 
-
-
     it('post to checkout redirects to Stripe', function () {
 
         \Pest\Laravel\post(route('cart.checkout', [
             'order' => $this->order
         ]))
+
         ->assertRedirect();
     });
 

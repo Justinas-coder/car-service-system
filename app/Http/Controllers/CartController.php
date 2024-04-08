@@ -49,11 +49,6 @@ class CartController extends Controller
         }
     }
 
-    public function cancel()
-    {
-
-    }
-
     public function webhook()
     {
         // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -67,12 +62,12 @@ class CartController extends Controller
             $event = \Stripe\Webhook::constructEvent(
                 $payload, $sig_header, $endpoint_secret
             );
-        } catch (\UnexpectedValueException | SignatureVerificationException $e) {
+        } catch (\UnexpectedValueException|SignatureVerificationException $e) {
             // Invalid payload
             return response('', 400);
         }
 
-// Handle the event
+        // Handle the event
         switch ($event->type) {
             case 'checkout.session.completed':
                 $session = $event->data->object;
@@ -91,7 +86,5 @@ class CartController extends Controller
         }
 
         return response('');
-
-
     }
 }
