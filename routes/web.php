@@ -36,8 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    Route::get('/cart/{order}', [CartController::class, 'show'])->name('cart.show');
-
+    Route::get('/cart/{order}', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/checkout/{order}', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/success', [CartController::class, 'success'])->name('cart.success');
+    Route::get('/cancel', [CartController::class, 'cancel'])->name('cart.cancel');
+    Route::post('/webhook', [CartController::class, 'webhook'])->name('cart.webhook');
 
     Route::resource('vehicles', VehicleMakeController::class)->except(['store']);
 

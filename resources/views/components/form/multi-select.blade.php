@@ -8,6 +8,12 @@
     <input type="hidden" name="services" x-bind:value="value" required/>
 </div>
 
+<style>
+    .choices{
+        /*max-height: 40px;*/
+    }
+</style>
+
 <script>
     function multiSelect() {
         return {

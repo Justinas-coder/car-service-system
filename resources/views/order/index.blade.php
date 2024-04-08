@@ -121,7 +121,7 @@
                             @endif
                             @if($order->status === App\Enums\OrderStatus::NOT_PAID)
                                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-3">
-                                    <a href="{{ route('cart.show', $order->id) }}"
+                                    <a href="{{ route('cart.index', $order->id) }}"
                                        class="px-4 py-1.5 bg-purple-800 text-white rounded-md hover:bg-blue-700">Check
                                         out</a>
                                 </td>
@@ -135,7 +135,7 @@
                     </tbody>
                 </table>
             @else
-                <p>No orders found.</p>
+                <p>{{ __('No orders found.')}}</p>
             @endif
         </div>
     </div>

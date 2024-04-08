@@ -19,13 +19,15 @@ class OrderFactory extends Factory
 
     public function definition(): array
     {
+        $vehicleMake = VehicleMake::factory()->createOne();
+        $vehicleModel = VehicleModel::factory()->for($vehicleMake, 'make')->createOne();
+
         return [
-            'user_id' => rand(1,10),
-            'vehicle_make_id' => VehicleMake::inRandomOrder()->value('id'),
-            'vehicle_model_id' => VehicleModel::inRandomOrder()->value('id'),
+            'vehicle_make_id' => $vehicleMake->id,
+            'vehicle_model_id' => $vehicleModel->id,
             'year' => fake()->year,
             'total_price' => fake()->randomFloat(2, 20, 200),
-            'status' => OrderStatus::randomEnum()
+            'status' => OrderStatus::NOT_PAID
         ];
     }
 }
