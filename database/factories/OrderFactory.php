@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Enums\EnumTrait;
 use App\Enums\OrderStatus;
-use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\VehicleMake;
@@ -20,14 +19,15 @@ class OrderFactory extends Factory
 
     public function definition(): array
     {
+        $vehicleMake = VehicleMake::factory()->createOne();
+        $vehicleModel = VehicleModel::factory()->for($vehicleMake, 'make')->createOne();
+
         return [
-            'user_id' => User::factory(),
-            'vehicle_make_id' => VehicleMake::inRandomOrder()->value('id'),
-            'vehicle_model_id' => VehicleModel::inRandomOrder()->value('id'),
+            'vehicle_make_id' => $vehicleMake->id,
+            'vehicle_model_id' => $vehicleModel->id,
             'year' => fake()->year,
-            'service_id' => Service::factory(),
             'total_price' => fake()->randomFloat(2, 20, 200),
-            'status' => OrderStatus::randomEnum()
+            'status' => OrderStatus::NOT_PAID
         ];
     }
 }

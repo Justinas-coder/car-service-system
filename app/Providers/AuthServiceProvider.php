@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+
+use App\Enums\EnumTrait;
+use App\Enums\UserStatus;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -12,15 +15,20 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
+    use EnumTrait;
     protected $policies = [
         //
     ];
 
     /**
-     * Register any authentication / authorization services.
+     * Register any authentication / authorization service.
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        Gate::define('isAdmin', function ($user) {
+            return $user->role === UserStatus::ADMIN->value;
+        });
     }
 }

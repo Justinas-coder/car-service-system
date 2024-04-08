@@ -29,14 +29,21 @@ return new class extends Migration
                 ->constrained()
                 ->nullOnDelete();
 
-            $table->year('year');
-            $table->foreignId('service_id')
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
+            $table->integer('year')
+                ->nullable();
 
-            $table->integer('total_price');
-            $table->string('status');
+            $table->string('session_id')
+                ->nullable();
+
+            $table->bigInteger('total_price')
+                ->nullable();
+
+            $table->bigInteger('total_tax')
+                ->nullable();
+
+            $table->string('status')
+                ->nullable();
+
             $table->timestamps();
         });
     }
