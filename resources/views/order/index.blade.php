@@ -135,7 +135,7 @@
                     </tbody>
                 </table>
             @else
-                <p>No orders found.</p>
+                <p>{{ __('No orders found.')}}</p>
             @endif
         </div>
     </div>

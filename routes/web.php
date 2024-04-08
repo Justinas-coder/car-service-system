@@ -42,9 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/cancel', [CartController::class, 'cancel'])->name('cart.cancel');
     Route::post('/webhook', [CartController::class, 'webhook'])->name('cart.webhook');
 
-
-
-
     Route::resource('vehicles', VehicleMakeController::class)->except(['store']);
 
     Route::resource('models', VehicleModelController::class)->only(['edit', 'update', 'destroy']);

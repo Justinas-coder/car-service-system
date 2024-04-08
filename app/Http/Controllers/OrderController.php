@@ -8,6 +8,7 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\VehicleMake;
+use App\Services\OrderService;
 use App\Services\ServiceModelService;
 use Illuminate\Http\Request;
 use App\Http\Resources\OrderResource;
@@ -16,6 +17,13 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+    protected $orderService;
+
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     public function index()
     {
         return view('order.index', [
@@ -38,21 +46,13 @@ class OrderController extends Controller
     {
         $services = explode(',', $request->services);
 
-        $totalPrice = (new ServiceModelService())->calculateTotalPrice($services);
-
-        $order = Order::create([
-            'user_id' => auth()->id(),
-            'vehicle_make_id' => $request->make_id,
-            'vehicle_model_id' => $request->model_id,
-            'year' => $request->year,
-            'status' => OrderStatus::NOT_PAID,
-            'total_price' => $totalPrice,
-            'total_tax' => $totalPrice * 0.21
-        ]);
-
-        foreach ($services as $service) {
-            $order->services()->attach($service);
-        }
+        $order = $this->orderService->createOrder(
+            auth()->id(),
+            $request->make_id,
+            $request->model_id,
+            $request->year,
+            $services
+        );
 
         return redirect()->route('orders.index')
             ->with('success', 'Order created successfully!');
@@ -65,25 +65,23 @@ class OrderController extends Controller
         ]);
     }
 
-    public function update(Order $order, Request $request)
+    public function update(Request $request, Order $order)
     {
-        $services = explode(',', $request->services);
+        if ($request->services) {
+            $services = explode(',', $request->services);
 
-        $totalPrice = (new ServiceModelService())->calculateTotalPrice($services);
+            $order->services()->sync(ids: $services);
+        }
+
+        $totalPrice = (new ServiceModelService())->calculateTotalPrice($order->services->pluck('id'));
 
         $order->update([
-            'vehicle_make_id' => $request->make_id,
-            'vehicle_model_id' => $request->model_id,
-            'year' => $request->years,
-            'status' => $request->status,
+            'vehicle_make_id' => $request->make_id ?? $order->vehicle_make_id,
+            'vehicle_model_id' => $request->model_id ?? $order->vehicle_model_id,
+            'year' => $request->year ?? $order->year,
+            'status' => $request->status ?? $order->status,
             'total_price' => $totalPrice
         ]);
-
-        $order->services()->detach();
-
-        foreach ($services as $service) {
-            $order->services()->attach($service);
-        }
 
         return redirect()->route('orders.index')
             ->with('success', "Order updated successfully!");

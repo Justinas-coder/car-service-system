@@ -9,8 +9,6 @@ class ServiceModelService
 {
     public static function calculateTotalPrice($services)
     {
-        $serviceIds = array_map('intval', $services);
-
-        return Service::whereIn('id', $serviceIds)->sum('price');
+        return Service::whereIn('id', $services)->sum('price');
     }
 }

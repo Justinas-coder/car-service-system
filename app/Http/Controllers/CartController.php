@@ -4,14 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
-use App\Services\StripeService;
+use App\Services\StripeCheckoutService;
+use App\Services\StripeWebHookService;
 use Illuminate\Http\Request;
+use Stripe\Exception\SignatureVerificationException;
 use Stripe\Stripe;
 use Stripe\StripeClient;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CartController extends Controller
 {
+    protected $checkoutService;
+
+    public function __construct(StripeCheckoutService $checkoutService)
+    {
+        $this->checkoutService = $checkoutService;
+    }
+
     public function index(Order $order)
     {
         return view('cart.index', [
@@ -21,64 +30,21 @@ class CartController extends Controller
 
     public function checkout(Order $order)
     {
-        Stripe::setApiKey(config('services.stripe.key'));
+        $checkoutUrl = $this->checkoutService->processCheckout($order);
 
-        $stripe = new StripeClient(config('services.stripe.key'));
-
-        $lineItems = [];
-
-        foreach ($order->services as $service) {
-            $lineItems[] = [
-                'price_data' => [
-                    'currency' => 'eur',
-                    'product_data' => [
-                        'name' => $service->name,
-                    ],
-                    'unit_amount' => $service->price * 100,
-                ],
-                'quantity' => 1,
-            ];
-        }
-
-        $checkout_session = $stripe->checkout->sessions->create([
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'success_url' => route('cart.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => route('cart.cancel', [], true),
-            'customer_creation' => 'always'
-        ]);
-
-        $order->session_id = $checkout_session->id;
-        $order->save();
-
-        return redirect($checkout_session->url);
+        return redirect($checkoutUrl);
     }
 
     public function success(Request $request)
     {
-        $stripe = new \Stripe\StripeClient(config('services.stripe.key'));
-
         $sessionId = $request->get('session_id');
 
         try {
-            $session = $stripe->checkout->sessions->retrieve($sessionId);
-            if (!$session) {
-                throw new NotFoundHttpException;
-            }
-            $customer = $stripe->customers->retrieve($session->customer);
-
-            $order = Order::where('session_id', $session->id)->first();
-            if (!$order) {
-                throw new NotFoundHttpException();
-            }
-            if ($order->status === OrderStatus::NOT_PAID) {
-                $order->status = OrderStatus::COMPLETED;
-                $order->save();
-            }
+            $customer = $this->checkoutService->markOrderAsPaid($sessionId);
 
             return view('payment.checkout-success', compact('customer'));
 
-        } catch (\Exception $e) {
+        } catch (\Throwable) {
             throw new NotFoundHttpException();
         }
     }
@@ -91,7 +57,7 @@ class CartController extends Controller
     public function webhook()
     {
         // This is your Stripe CLI webhook secret for testing your endpoint locally.
-        $endpoint_secret = env('STRIPE_WEBHOOK_ET');
+        $endpoint_secret = config('services.stripe.webhook_key');
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -101,11 +67,8 @@ class CartController extends Controller
             $event = \Stripe\Webhook::constructEvent(
                 $payload, $sig_header, $endpoint_secret
             );
-        } catch (\UnexpectedValueException $e) {
+        } catch (\UnexpectedValueException | SignatureVerificationException $e) {
             // Invalid payload
-            return response('', 400);
-        } catch (\Stripe\Exception\SignatureVerificationException $e) {
-            // Invalid signature
             return response('', 400);
         }
 
@@ -120,6 +83,7 @@ class CartController extends Controller
                     $order->status = OrderStatus::COMPLETED;
                     $order->save();
                 }
+                break;
 
             // ... handle other event types
             default:

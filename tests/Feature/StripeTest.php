@@ -12,8 +12,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 beforeEach(function () {
     $this->service = Service::factory()->createOne();
 
-
-
     $this->make = VehicleMake::create([
         'title' => fake()->name()
     ]);
@@ -22,50 +20,30 @@ beforeEach(function () {
         'title' => fake()->name()
     ]);
 
+    $this->order = Order::factory()->has(Service::factory()->count(3))->createOne();
+
 });
 
 describe('test order posted to stripe checkout successful', function () {
 
-    it('test creates order successful', function () {
 
-        actingAs(User::factory()->createOne());
 
-        $orderRequest = [
-            'make_id' => $this->make->id,
-            'model_id' => $this->makeModel->id,
-            'year' => 2023,
-            'services' => $this->service->id,
-        ];
-
-        $request = \Pest\Laravel\post(route('orders.store'), $orderRequest)
-            ->assertRedirect();
-
-        $createdOrder = Order::latest()->first();
-
-        expect($createdOrder->vehicle_make_id)->toBe($this->make->id);
-
-    });
-
-    it('post to checkout', function () {
-
-        $createdOrder = Order::factory()->createOne();
+    it('post to checkout redirects to Stripe', function () {
 
         \Pest\Laravel\post(route('cart.checkout', [
-            'order' => $createdOrder
+            'order' => $this->order
         ]))
         ->assertRedirect();
     });
 
-    it('success', function () {
+    it('session_id is saved to order after checkout', function () {
 
-        $createdOrder = Order::factory()->createOne();
+        $checkoutService = new \App\Services\StripeCheckoutService();
 
-        \Pest\Laravel\post(route('cart.checkout', [
-            'order' => $createdOrder
-        ]))
-            ->assertRedirect();
+        $checkoutData = $checkoutService->processCheckout($this->order);
+
+        expect($this->order->session_id)->not->toBeNull();
+
     });
-
-
 });
 

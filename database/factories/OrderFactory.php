@@ -27,7 +27,7 @@ class OrderFactory extends Factory
             'vehicle_model_id' => $vehicleModel->id,
             'year' => fake()->year,
             'total_price' => fake()->randomFloat(2, 20, 200),
-            'status' => OrderStatus::randomEnum()
+            'status' => OrderStatus::NOT_PAID
         ];
     }
 }
