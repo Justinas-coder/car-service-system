@@ -61,8 +61,8 @@ class StripeCheckoutService
         $order = Order::where('session_id', $session->id)->firstOrFail();
 
         if ($order->status === OrderStatus::NOT_PAID) {
-            $order->status = OrderStatus::COMPLETED;
-            $order->save();
+            $order->status = OrderStatus::IN_PROGRESS;
+            $order->update();
         }
 
         return $customer;

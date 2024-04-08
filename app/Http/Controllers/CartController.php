@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Stripe;
 use Stripe\StripeClient;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CartController extends Controller
@@ -47,44 +48,5 @@ class CartController extends Controller
         } catch (\Throwable) {
             throw new NotFoundHttpException();
         }
-    }
-
-    public function webhook()
-    {
-        // This is your Stripe CLI webhook secret for testing your endpoint locally.
-        $endpoint_secret = config('services.stripe.webhook_key');
-
-        $payload = @file_get_contents('php://input');
-        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-        $event = null;
-
-        try {
-            $event = \Stripe\Webhook::constructEvent(
-                $payload, $sig_header, $endpoint_secret
-            );
-        } catch (\UnexpectedValueException|SignatureVerificationException $e) {
-            // Invalid payload
-            return response('', 400);
-        }
-
-        // Handle the event
-        switch ($event->type) {
-            case 'checkout.session.completed':
-                $session = $event->data->object;
-                $sessionId = $session->id;
-
-                $order = Order::where('session_id', $session->id)->first();
-                if ($order && $order->status === OrderStatus::NOT_PAID) {
-                    $order->status = OrderStatus::COMPLETED;
-                    $order->save();
-                }
-                break;
-
-            // ... handle other event types
-            default:
-                echo 'Received unknown event type ' . $event->type;
-        }
-
-        return response('');
     }
 }

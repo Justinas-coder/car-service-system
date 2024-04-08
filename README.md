@@ -43,18 +43,18 @@ cd project-directory
 cp .env.example .env
 ```
 
-5. Generate app encryption key
+5. Generate app encryption key:
 ```
 php artisan key:generate
 ```
-6. Create a new database for the application.
+6. Create a new database for the application:
 
-7. Make migrations using CML command as bellow:
+7. Make migrations:
 
 ```
 php artisan migrate
 ```
-8. Seed database using CML command.
+8. Seed database:
 ```
 php artisan db:seed
 ```
