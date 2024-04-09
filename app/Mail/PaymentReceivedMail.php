@@ -4,25 +4,24 @@ namespace App\Mail;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
-use Illuminate\Mail\Mailables\Attachment;
 
-class InvoiceEmail extends Mailable
+class PaymentReceivedMail extends Mailable
 {
-    use Queueable, SerializesModels;
-
-    public $invoiceData;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        public Order $order,
-    ){}
+    public function __construct(public Order $order)
+    {
+    }
 
     /**
      * Get the message envelope.
@@ -30,8 +29,8 @@ class InvoiceEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            new Address(config('mail.from.primary')),
-            subject: sprintf(' Order - %s Invoice', $this->order->id),
+            from: new Address(config('mail.from.primary')),
+            subject: sprintf('%s- Payment Received', config('app.name')),
         );
     }
 
@@ -41,7 +40,7 @@ class InvoiceEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.client.invoice-email',
+            view: 'mail.client.payment-received-mail',
         );
     }
 
@@ -52,8 +51,6 @@ class InvoiceEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [
-            Attachment::fromPath(storage_path("app/{$this->order->id}.pdf")),
-        ];
+        return [];
     }
 }

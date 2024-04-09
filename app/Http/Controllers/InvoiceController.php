@@ -10,7 +10,7 @@ use Spatie\Browsershot\Browsershot;
 
 class InvoiceController extends Controller
 {
-    protected $invoiceMailService;
+    protected InvoiceMailService $invoiceMailService;
 
     public function __construct(InvoiceMailService $invoiceMailService)
     {

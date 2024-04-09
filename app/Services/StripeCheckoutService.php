@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Enums\OrderStatus;
+//use App\Events\StripePaimentProcessed;
+use App\Events\StripePaimentProcessed;
 use App\Models\Order;
 use Stripe\Stripe;
 use Stripe\StripeClient;
@@ -63,6 +65,8 @@ class StripeCheckoutService
         if ($order->status === OrderStatus::NOT_PAID) {
             $order->status = OrderStatus::IN_PROGRESS;
             $order->update();
+
+            event(new StripePaimentProcessed($order));
         }
 
         return $customer;

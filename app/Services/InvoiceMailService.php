@@ -13,7 +13,7 @@ class InvoiceMailService
 {
     public function sendInvoiceEmail(Order $order): string
     {
-        $html = view("mail.invoice-email", [
+        $html = view("mail.client.invoice-email", [
             'order' => $order
         ])->render();
 
