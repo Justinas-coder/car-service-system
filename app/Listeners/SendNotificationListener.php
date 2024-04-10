@@ -12,12 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class SendNotificationListener
 {
-    protected PaymentSuccessMailService $paymentSuccessMailService;
-
-    public function __construct(PaymentSuccessMailService $paymentSuccessMailService)
-    {
-        $this->paymentSuccessMailService = $paymentSuccessMailService;
-    }
+    public function __construct(protected PaymentSuccessMailService $paymentSuccessMailService) { }
 
     public function handle(StripePaimentProcessed $event)
     {
